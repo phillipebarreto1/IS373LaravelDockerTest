@@ -7,3 +7,19 @@
 ```
 docker network create backend
 ```
+
+## Push docker image to docker hub
+Commit the image
+```
+docker container commit c16378f943fe watchtower:latest
+```
+
+Create tag for the docker image
+```
+docker image tag watchtower:latest sagedemage/watchtower:latest
+```
+
+Push image to docker hub
+```
+docker image tag watchtower:latest sagedemage/watchtower:latest
+```
