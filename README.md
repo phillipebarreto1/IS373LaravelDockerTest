@@ -15,6 +15,11 @@ docker compose up
 ```
 
 ## Push docker image to docker hub
+Login to Docker
+```
+docker login
+```
+
 Commit the image
 ```
 docker container commit c16378f943fe watchtower:latest
