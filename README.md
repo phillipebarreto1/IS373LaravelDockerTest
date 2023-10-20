@@ -1,7 +1,15 @@
 # IS373LaravelDockerTest
 
-### To start, change directory with cd laravel-app.
-### Then, build up the image with and check your docker to make sure the container is up and running with ./vendor/bin/sail up
+## Run Laravel Docker image
+change directory to laravel-app
+```
+cd laravel-app
+```
+
+Start Laravel Docker image
+```
+./vendor/bin/sail up
+```
 
 ## Run Watch Tower Docker Image
 Setup Network for Watch Tower
