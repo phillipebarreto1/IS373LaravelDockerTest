@@ -40,5 +40,5 @@ docker image tag watchtower:latest sagedemage/watchtower:latest
 
 Push image to docker hub
 ```
-docker image tag watchtower:latest sagedemage/watchtower:latest
+docker image push sagedemage/watchtower:latest
 ```
