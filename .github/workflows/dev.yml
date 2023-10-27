@@ -26,6 +26,6 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          file: docker-compose.yml
+          file: laravel-app/docker-compose.yml
           push: true
           tags: phillipebarreto1/laravel-app:latest
