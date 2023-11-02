@@ -60,4 +60,7 @@ This command makes a movie model and movies table all at once
 Final command after this is completed will be:
 php artisan migrate
  This migrates all models and tables created.
+
+## Laravel ORM Commands
+[Laravel ORM Commands](./docs/laravel_orm_commands.md)
  
