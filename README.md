@@ -63,4 +63,7 @@ php artisan migrate
 
 ## Laravel ORM Commands
 [Laravel ORM Commands](./docs/laravel_orm_commands.md)
+
+## Thinker Commands
+[Thinker Commands](./docs/thinker_commands)
  
