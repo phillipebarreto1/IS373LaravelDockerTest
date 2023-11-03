@@ -20,9 +20,8 @@ class MovieFactory extends Factory
     public function definition(): array
     {
         return [
-            'id'=> fake()->id(),
             'title'=> fake()->title(),
-            'yearReleased'=> now(),
+            'yearReleased'=> 2023,
             'avgRating'=> 8,
 
 

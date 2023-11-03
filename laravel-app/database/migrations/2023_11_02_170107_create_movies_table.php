@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('movies', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->integer('yearReleased');
+            $table->bigInteger('yearReleased');
             $table->decimal('avgRating');
             $table->timestamps();
         });
