@@ -11,11 +11,6 @@ RUN apt-get update && apt-get install git curl zip unzip php8.1 php8.1-common ph
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Create system user to run Composer and Artisan Commands
-RUN useradd -G www-data,root -u 1000 -d /home/user user
-RUN mkdir -p /home/user/.composer && \
-    chown -R user:user /home/user
-
 # Copy project files
 COPY . /var/www/html
 RUN composer install
