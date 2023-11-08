@@ -18,7 +18,11 @@ RUN composer install
 # Copy apache config to apache
 COPY docker/apache/000-default.conf /etc/apache2/sites-available/000-default.conf
 
-RUN chown -R www-data:www-data /var/www/html && a2enmod rewrite
+RUN php artisan config:cache && \
+    php artisan route:cache && \
+    chmod 777 -R /var/www/html/storage/ && \
+    chown -R www-data:www-data /var/www/ && \
+    a2enmod rewrite
 
 EXPOSE 80
 CMD apachectl -D FOREGROUND
