@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Movie;
-use Database\Seeders\MovieSeeder;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
 
 class MovieController extends Controller
 {
