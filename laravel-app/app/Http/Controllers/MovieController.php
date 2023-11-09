@@ -13,9 +13,6 @@ class MovieController extends Controller
     public function get(string $id): Movie {
         $movie = Movie::findOrFail($id);
         return $movie;
-        /*return view('movies', [
-            'movies' => Movie::findOrFail($id)
-        ]);*/
     }
 
     public function create(Request $request): string {
@@ -24,9 +21,6 @@ class MovieController extends Controller
         $movie->title = $request->title;
         $movie->yearReleased = $request->yearReleased;
         $movie->avgRating = $request->avgRating;
-        $movie->created_at = $request->updated_at;
-        $movie->updated_at = $request->updated_at;
-        
 
         $movie->save();
         return "Add a movie";
