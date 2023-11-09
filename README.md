@@ -64,3 +64,5 @@ php artisan migrate
 ## Laravel ORM Commands
 [Laravel ORM Commands](./docs/laravel_orm_commands.md)
 
+## CRUD APIs
+[CRUD APIs](./docs/crud_api.md)
