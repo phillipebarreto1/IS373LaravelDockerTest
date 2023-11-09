@@ -1,7 +1,5 @@
 # CRUD APIs
-URL: `http://localhost:80/movie/{id}`
-* Method: GET
-
+## CREATE
 URL: `http://localhost:80/movie`
 * Method: POST
 ```
@@ -12,6 +10,11 @@ URL: `http://localhost:80/movie`
 }
 ```
 
+## READ
+URL: `http://localhost:80/movie/{id}`
+* Method: GET
+
+## UPDATE
 URL: `http://localhost:80/movie`
 * Method: PATCH
 ```
@@ -23,5 +26,6 @@ URL: `http://localhost:80/movie`
 }
 ```
 
+## DELETE
 URL: `http://localhost:80/movie/{id}`
 * Method: DELETE
