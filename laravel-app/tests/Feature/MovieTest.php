@@ -6,6 +6,7 @@ use Database\Seeders\MovieSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use Illuminate\Testing\Fluent\AssertableJson;
 
 class MovieTest extends TestCase
 {
@@ -32,8 +33,18 @@ class MovieTest extends TestCase
     }
 
     public function test_get_request(): void {
-        $response = $this->get('/movie/1');
- 
+        $response = $this->getJson('/movie/1');
+
         $response->assertStatus(200); 
+ 
+        $response
+        ->assertJson(fn (AssertableJson $json) =>
+            $json->where('id', 1)
+                 ->where('name', 'Victoria Faith')
+                 ->where('email', fn (string $email) => str($email)->is('victoria@gmail.com'))
+                 ->whereNot('status', 'pending')
+                 ->missing('password')
+                 ->etc()
+        );
     }
 }
