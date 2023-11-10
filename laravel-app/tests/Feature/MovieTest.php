@@ -37,16 +37,14 @@ class MovieTest extends TestCase
 
         $response->assertStatus(200); 
         
-        /*
         $response
         ->assertJson(fn (AssertableJson $json) =>
             $json->where('id', 1)
-                 ->where('name', 'Victoria Faith')
-                 ->where('email', fn (string $email) => str($email)->is('victoria@gmail.com'))
-                 ->whereNot('status', 'pending')
-                 ->missing('password')
+                 ->where('title', 'Matrix')
+                 ->where('yearReleased', 1990)
+                 ->where('avgRating', 5)
                  ->etc()
         );
-        */
+        
     }
 }
