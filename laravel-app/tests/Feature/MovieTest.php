@@ -17,7 +17,7 @@ class MovieTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_create_request(): void
+    public function test_create_movie(): void
     {
         // CREATE Test Case
         $response = $this->postJson('/movie', ['title' => 'Matrix', 'yearReleased' => 1990, 'avgRating' => 5.0]);
@@ -27,7 +27,7 @@ class MovieTest extends TestCase
         $response->assertContent("Add a movie");
     }
 
-    public function test_get_request(): void {
+    public function test_get_movie(): void {
         // READ Test Case
         $response = $this->getJson('/movie/1');
 
@@ -44,7 +44,7 @@ class MovieTest extends TestCase
         
     }
 
-    public function test_update_request(): void
+    public function test_update_movie(): void
     {
         // UPDATE Test Case
         $response = $this->patchJson('/movie', ['id' => 1, 'title' => 'The Matrix Reloaded', 'yearReleased' => 2003, 'avgRating' => 7.2]);
