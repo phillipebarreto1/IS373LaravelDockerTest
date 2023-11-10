@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM debian:stable-slim
 WORKDIR /var/www/html
 ENV COMPOSER_ALLOW_SUPERUSER=1
 ENV APP_ENV=local
@@ -6,7 +6,7 @@ ENV APP_DEBUG=true
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Install System Dependencies
-RUN apt-get update && apt-get install git curl zip unzip php8.1 php8.1-common php8.1-mysql php8.1-xml php8.1-curl php8.1-xdebug php8.1-sqlite php8.1-mbstring apache2 -y
+RUN apt-get update && apt-get install git curl zip unzip php8.2 php8.2-common php8.2-mysql php8.2-xml php8.2-curl php8.2-xdebug php8.2-sqlite php8.2-mbstring apache2 -y
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
