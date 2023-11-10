@@ -19,11 +19,14 @@ RUN composer install
 COPY docker/apache/000-default.conf /etc/apache2/sites-available/000-default.conf
 
 RUN php artisan config:cache && \
-    php artisan route:cache && \
-    chmod 777 -R /var/www/html/storage/ && \
-    chmod 777 -R /var/www/html/sqlite_db/ && \
-    chown -R www-data:www-data /var/www/ && \
-    a2enmod rewrite
+    php artisan route:cache
+
+RUN chmod 777 -R /var/www/html/storage/
+
+# This parts takes a while to finish
+RUN chown -R www-data:www-data /var/www/
+
+RUN a2enmod rewrite
 
 EXPOSE 80
 CMD apachectl -D FOREGROUND
