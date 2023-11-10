@@ -27,7 +27,8 @@ class MovieTest extends TestCase
         $response->assertContent("Add a movie");
     }
 
-    public function test_get_movie(): void {
+    public function test_get_movie(): void 
+    {
         // READ Test Case
         $response = $this->getJson('/movie/1');
 
@@ -52,5 +53,15 @@ class MovieTest extends TestCase
         $response->assertStatus(200);
 
         $response->assertContent("Update a movie");
+    }
+
+    public function test_delete_movie(): void
+    {
+        // DELETE Test Case
+        $response = $this->delete('/movie/1');
+
+        $response->assertStatus(200);
+
+        $response->assertContent("Delete a movie");
     }
 }
