@@ -28,7 +28,8 @@ class MovieController extends Controller
         $movie->avgRating = $request->avgRating;
 
         $movie->save();
-        return "Add a movie";
+
+        return redirect('/movie');
     }
 
     public function update(Request $request): string {

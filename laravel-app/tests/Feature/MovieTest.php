@@ -24,7 +24,8 @@ class MovieTest extends TestCase
 
         $response->assertStatus(200);
 
-        $response->assertContent("Add a movie");
+        $response->assertSeeText("HTTP/1.0 302 Found", $escaped = true);
+        $response->assertSeeText("Location:      http://localhost/movie", $escaped = true);
     }
 
     public function test_get_movie(): void 
