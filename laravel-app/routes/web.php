@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MovieController;
+use App\Models\Movie;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +20,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::put('/movie/{id}', 'MovieController@update')->name('movie.update');
+/*Route::put('/movie/{id}', 'MovieController@update')->name('movie.update'); */
 
 Route::get('/movie/update', function (){
     return view('updateMovie');
@@ -35,3 +37,10 @@ Route::get('/movie/create', function (){
 Route::get('/movie/delete', function (){
     return view('deleteMovie');
 });
+
+Route::get('/movie', function (){
+    return view('viewMovies');
+});
+
+Route::get('viewMovies', [MovieController::class, 'show']
+);

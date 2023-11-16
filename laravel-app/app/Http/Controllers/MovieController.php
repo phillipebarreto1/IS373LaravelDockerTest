@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class MovieController extends Controller
 {
+    
+    function show(){
+        $data = Movie::all();
+        return view ('viewMovies', ['movie'=>$data]);
+    }
+    
     public function get(string $id): Movie {
         // READ
         $movie = Movie::findOrFail($id);

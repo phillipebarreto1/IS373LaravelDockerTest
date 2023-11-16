@@ -17,6 +17,7 @@
         <form action="" method="POST">
             @csrf
 
+            
             <div class="form-group">
                 <label for="title">Title:</label>
                 <input type="text" class="form-control" id="title" name="title" placeholder="Enter Movie Title" required>
@@ -24,12 +25,12 @@
 
             <div class="form-group">
                 <label for="year_released">Year Released:</label>
-                <input type="number" class="form-control" id="year_released" name="year_released" placeholder="Enter Year Released" required>
+                <input type="number" class="form-control" id="yearReleased" name="yearReleased" placeholder="Enter Year Released" required>
             </div>
 
             <div class="form-group">
                 <label for="rating">Average Rating:</label>
-                <input type="number" class="form-control" id="rating" name="rating" placeholder="Enter Average Rating" step="0.1" required>
+                <input type="number" class="form-control" id="avgRating" name="avgRating" placeholder="Enter Average Rating" step="0.1" required>
             </div>
 
             <!-- Add more fields as needed -->
