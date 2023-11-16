@@ -20,7 +20,7 @@ class MovieTest extends TestCase
     public function test_create_movie(): void
     {
         // CREATE Test Case
-        $response = $this->postJson('/movie', ['title' => 'Matrix', 'yearReleased' => 1990, 'avgRating' => 5.0]);
+        $response = $this->postJson('/api/movie', ['title' => 'Matrix', 'yearReleased' => 1990, 'avgRating' => 5.0]);
 
         $response->assertStatus(200);
 
@@ -30,7 +30,7 @@ class MovieTest extends TestCase
     public function test_get_movie(): void 
     {
         // READ Test Case
-        $response = $this->getJson('/movie/1');
+        $response = $this->getJson('/api/movie/1');
 
         $response->assertStatus(200); 
         
@@ -48,7 +48,7 @@ class MovieTest extends TestCase
     public function test_update_movie(): void
     {
         // UPDATE Test Case
-        $response = $this->patchJson('/movie', ['id' => 1, 'title' => 'The Matrix Reloaded', 'yearReleased' => 2003, 'avgRating' => 7.2]);
+        $response = $this->patchJson('/api/movie', ['id' => 1, 'title' => 'The Matrix Reloaded', 'yearReleased' => 2003, 'avgRating' => 7.2]);
 
         $response->assertStatus(200);
 
@@ -58,7 +58,7 @@ class MovieTest extends TestCase
     public function test_delete_movie(): void
     {
         // DELETE Test Case
-        $response = $this->delete('/movie/1');
+        $response = $this->delete('/api/movie/1');
 
         $response->assertStatus(200);
 

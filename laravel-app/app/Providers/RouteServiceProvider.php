@@ -37,10 +37,10 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
 
-            Route::get('/movie/{id}', [MovieController::class, 'get']);
-            Route::post('/movie', [MovieController::class, 'create']);
-            Route::patch('/movie', [MovieController::class, 'update']);
-            Route::delete('/movie/{id}', [MovieController::class, 'delete']);
+            Route::get('/api/movie/{id}', [MovieController::class, 'get']);
+            Route::post('/api/movie', [MovieController::class, 'create']);
+            Route::patch('/api/movie', [MovieController::class, 'update']);
+            Route::delete('/api/movie/{id}', [MovieController::class, 'delete']);
 
         });
     }
