@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
 
     <div class="container mt-5">
@@ -19,7 +21,26 @@
                 <div class="overflow-auto" style="max-height: 300px;">
                     <!-- Your movie entries will be added here dynamically -->
                     <!-- Example entry: -->
-                    <p class="card-text">Movie Title: Example Movie, Year: 2022, Rating: 8.5</p>
+                    <p class="card-text">
+                    <table class="table">
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Year Released</th>
+                            <th>Average Rating</th>
+                        </tr>
+
+                        @foreach ($data as $movie)
+                        <tr>
+                            <td> {{$movie->id }} </td>
+                            <td> {{$movie->title}}</td>
+                            <td>{{$movie->yearReleased}}</td>
+                            <td>{{$movie->avgRating}}</td>
+                        </tr>
+                        @endforeach
+
+                    </table>
+                    </p>
                     <!-- Add more entries as needed -->
                 </div>
             </div>
@@ -43,4 +64,5 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
+
 </html>

@@ -14,7 +14,7 @@
         <h1>Delete Movie From List</h1>
 
         <!-- Movie Add Form -->
-        <form action="" method="POST">
+        <form action="/api/movie" method="POST">
             @csrf
 
             <div class="form-group">

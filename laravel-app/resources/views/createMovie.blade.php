@@ -15,7 +15,7 @@
 
         <!-- Movie Add Form -->
         <form action="/api/movie" method="POST">
-            <!--@csrf-->
+            @csrf
 
             
             <div class="form-group">

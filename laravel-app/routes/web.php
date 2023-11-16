@@ -39,8 +39,11 @@ Route::get('/movie/delete', function (){
 });
 
 Route::get('/movie', function (){
-    return view('viewMovies');
+    $data = Movie::all();
+    return view('viewMovies', ['data'=> $data]);
 });
+
+
 
 Route::get('viewMovies', [MovieController::class, 'show']
 );
