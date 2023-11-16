@@ -41,6 +41,7 @@ class RouteServiceProvider extends ServiceProvider
             Route::post('/api/movie', [MovieController::class, 'create']);
             Route::patch('/api/movie', [MovieController::class, 'update']);
             Route::delete('/api/movie/{id}', [MovieController::class, 'delete']);
+            Route::get('/api/movies', [MovieController::class, 'show']);
 
         });
     }

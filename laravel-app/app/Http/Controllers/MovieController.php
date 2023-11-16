@@ -9,9 +9,9 @@ use Illuminate\Http\Request;
 class MovieController extends Controller
 {
     
-    function show(){
+    public function show(){
         $data = Movie::all();
-        return view ('viewMovies', ['movie'=>$data]);
+        return $data;
     }
     
     public function get(string $id): Movie {
