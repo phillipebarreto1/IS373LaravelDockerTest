@@ -38,7 +38,8 @@ class MovieController extends Controller
         $movie->title = $request->title;
         $movie->avgRating = $request->avgRating;
         $movie->save();
-        return "Update a movie";
+
+        return redirect('/movie');
     }
 
     public function delete(string $id): string {
@@ -46,6 +47,6 @@ class MovieController extends Controller
         $movie = Movie::findOrFail($id);
         $movie->delete();
 
-        return "Delete a movie";
+        return redirect('/movie');
     }
 }

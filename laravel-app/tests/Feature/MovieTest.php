@@ -53,7 +53,8 @@ class MovieTest extends TestCase
 
         $response->assertStatus(200);
 
-        $response->assertContent("Update a movie");
+        $response->assertSeeText("HTTP/1.0 302 Found", $escaped = true);
+        $response->assertSeeText("Location:      http://localhost/movie", $escaped = true);
     }
 
     public function test_delete_movie(): void
@@ -63,6 +64,7 @@ class MovieTest extends TestCase
 
         $response->assertStatus(200);
 
-        $response->assertContent("Delete a movie");
+        $response->assertSeeText("HTTP/1.0 302 Found", $escaped = true);
+        $response->assertSeeText("Location:      http://localhost/movie", $escaped = true);
     }
 }
