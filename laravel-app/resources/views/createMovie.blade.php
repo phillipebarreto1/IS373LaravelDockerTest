@@ -24,12 +24,12 @@
             </div>
 
             <div class="form-group">
-                <label for="year_released">Year Released:</label>
+                <label for="yearReleased">Year Released:</label>
                 <input type="number" class="form-control" id="yearReleased" name="yearReleased" placeholder="Enter Year Released" required>
             </div>
 
             <div class="form-group">
-                <label for="rating">Average Rating:</label>
+                <label for="avgRating">Average Rating:</label>
                 <input type="number" class="form-control" id="avgRating" name="avgRating" placeholder="Enter Average Rating" step="0.1" required>
             </div>
 
