@@ -15,13 +15,13 @@
     <div class="container mt-5">
         <h1>Movie List</h1>
 
-       <!-- Box Links -->
-       <div class="d-flex justify-content-around">
+        <!-- Box Links -->
+        <div class="d-flex justify-content-around">
             <a href="/movie/create" class="btn btn-primary">Add</a>
             <a href="/movie/get" class="btn btn-info">Find</a>
         </div>
         <!-- End Box Links -->
-      <br>  
+        <br>
         <!-- Scrollable Box for Movie Entries -->
         <div class="card mb-3">
             <div class="card-body">
@@ -31,21 +31,22 @@
                     <p class="card-text">
                     <table class="table">
                         <tr>
-                            <th>ID</th>
                             <th>Title</th>
                             <th>Year Released</th>
                             <th>Average Rating</th>
+                            <th></th>
                         </tr>
 
                         @foreach ($data as $movie)
                         <tr>
-                            <td> {{$movie->id }} </td>
                             <td> {{$movie->title}}</td>
                             <td>{{$movie->yearReleased}}</td>
                             <td>{{$movie->avgRating}}</td>
-                            <td><a href="/movie/info?id={{$movie->id }}"><button>Info</button></a></td>
-                            <td><a href="/movie/update?id={{$movie->id }}"><button>Update</button></a></td>
-                            <td><button onclick="delete_movie({{$movie->id }})">Delete</button></td>
+                            <td>
+                                <a class="px-2" href="/movie/info?id={{$movie->id }}"><button>Info</button></a>
+                                <a class="px-2" href="/movie/update?id={{$movie->id }}"><button>Update</button></a>
+                                <button class="px-2" onclick="delete_movie({{$movie->id }})">Delete</button>
+                            </td>
                         </tr>
                         @endforeach
 
