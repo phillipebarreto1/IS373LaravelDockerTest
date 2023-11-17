@@ -12,10 +12,10 @@ rm sqlite_db/database.sqlite
 
 Migrate the database of the testing environment
 ```
-php artisan migrate --env=workflow
+php artisan migrate --env=testing
 ```
 
 Run the unit tests
 ```
-php artisan test --parallel --env=workflow
+php artisan test --parallel --env=testing
 ```
