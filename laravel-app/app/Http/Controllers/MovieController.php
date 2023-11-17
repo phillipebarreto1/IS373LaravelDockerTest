@@ -30,6 +30,7 @@ class MovieController extends Controller
         // UPDATE
         $movie = Movie::findOrFail($request->id);
         $movie->title = $request->title;
+        $movie->yearReleased = $request->yearReleased;
         $movie->avgRating = $request->avgRating;
         $movie->save();
 
