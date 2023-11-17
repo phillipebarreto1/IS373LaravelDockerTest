@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,34 +9,22 @@
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
 
+<body>
     <div class="container mt-5">
         <h1>Look Up Movie</h1>
-
-        <!-- Movie Look Up Form -->
-        <form action="" method="GET">
-            @csrf
-
-            <div class="form-group">
-                <label for="title"><b>Title:</b></label>
-                <span type="text" id="title" name="title">
-            </div>
-            <div class="form-group">
-                <label for="title"><b>Year Released:</b></label>
-                <span type="text" id="yearReleased" name="yearReleased">
-            </div>
-            <div class="form-group">
-                <label for="title"><b>Average Rating:</b></label>
-                <span type="text" id="avgRating" name="avgRating">
-            </div>
-
-            <!-- Add more fields as needed -->
-
-            
-        </form>
-        <!-- End Movie Look Up Form -->
-
+        <div class="form-group">
+            <label for="title"><b>Title:</b></label>
+            <span type="text" id="title" name="title">
+        </div>
+        <div class="form-group">
+            <label for="title"><b>Year Released:</b></label>
+            <span type="text" id="yearReleased" name="yearReleased">
+        </div>
+        <div class="form-group">
+            <label for="title"><b>Average Rating:</b></label>
+            <span type="text" id="avgRating" name="avgRating">
+        </div>
     </div>
 
     <!-- Bootstrap JS and dependencies (optional) -->
@@ -61,4 +50,5 @@
     </script>
 
 </body>
+
 </html>
