@@ -26,8 +26,8 @@ Route::get('/movie/update', function (){
     return view('updateMovie');
 });
 
-Route::get('/movie/get', function (){
-    return view('getMovie');
+Route::get('/movie/info', function (){
+    return view('infoMovie');
 });
 
 Route::get('/movie/create', function (){

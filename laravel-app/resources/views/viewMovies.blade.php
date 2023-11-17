@@ -43,6 +43,7 @@
                             <td> {{$movie->title}}</td>
                             <td>{{$movie->yearReleased}}</td>
                             <td>{{$movie->avgRating}}</td>
+                            <td><a href="/movie/info?id={{$movie->id }}"><button>Info</button></a></td>
                             <td><a href="/movie/update?id={{$movie->id }}"><button>Update</button></a></td>
                             <td><button onclick="delete_movie({{$movie->id }})">Delete</button></td>
                         </tr>
