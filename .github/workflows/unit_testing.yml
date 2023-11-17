@@ -14,10 +14,13 @@ jobs:
       - uses: actions/checkout@v1
 
       - name: Run composer install
+        working-directory: ./laravel-app
         run: composer install
 
       - name: Migrate SQLite Database
+        working-directory: ./laravel-app
         run: php artisan migrate --env=testing
 
       - name: Run tests
+        working-directory: ./laravel-app
         run: php artisan test --parallel --env=testing
