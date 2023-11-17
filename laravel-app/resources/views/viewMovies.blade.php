@@ -14,12 +14,7 @@
 
     <div class="container mt-5">
         <h1>Movie List</h1>
-
-        <!-- Box Links -->
-        <div class="d-flex justify-content-around">
-            <a href="/movie/create" class="btn btn-primary">Add</a>
-            <a href="/movie/get" class="btn btn-info">Find</a>
-        </div>
+        <a href="/movie/create"><button type="button" class="btn btn-primary spacing my-4">Add</button></a>
         <!-- End Box Links -->
         <br>
         <!-- Scrollable Box for Movie Entries -->
@@ -43,9 +38,9 @@
                             <td>{{$movie->yearReleased}}</td>
                             <td>{{$movie->avgRating}}</td>
                             <td>
-                                <a class="px-2" href="/movie/info?id={{$movie->id }}"><button>Info</button></a>
-                                <a class="px-2" href="/movie/update?id={{$movie->id }}"><button>Update</button></a>
-                                <button class="px-2" onclick="delete_movie({{$movie->id }})">Delete</button>
+                                <a class="px-2" href="/movie/info?id={{$movie->id }}"><button type="button" class="btn btn-info">Info</button></a>
+                                <a class="px-2" href="/movie/update?id={{$movie->id }}"><button type="button" class="btn btn-primary">Update</button></a>
+                                <button type="button" class="btn btn-danger" class="px-2" onclick="delete_movie({{$movie->id }})">Delete</button>
                             </td>
                         </tr>
                         @endforeach
