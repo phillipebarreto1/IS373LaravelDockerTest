@@ -19,7 +19,7 @@ jobs:
 
       - name: Migrate SQLite Database
         working-directory: ./laravel-app
-        run: php artisan migrate --env=testing
+        run: php artisan migrate --env=testing --force
 
       - name: Run tests
         working-directory: ./laravel-app
