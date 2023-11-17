@@ -17,6 +17,9 @@ jobs:
         working-directory: ./laravel-app
         run: composer install
 
+      - name: Print Working Directory
+        run: pwd
+
       - name: Migrate SQLite Database
         working-directory: ./laravel-app
         run: php artisan migrate --env=testing --force
