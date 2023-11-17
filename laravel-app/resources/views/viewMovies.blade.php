@@ -15,6 +15,13 @@
     <div class="container mt-5">
         <h1>Movie List</h1>
 
+       <!-- Box Links -->
+       <div class="d-flex justify-content-around">
+            <a href="/movie/create" class="btn btn-primary">Add</a>
+            <a href="/movie/get" class="btn btn-info">Find</a>
+        </div>
+        <!-- End Box Links -->
+      <br>  
         <!-- Scrollable Box for Movie Entries -->
         <div class="card mb-3">
             <div class="card-body">
@@ -48,16 +55,6 @@
             </div>
         </div>
         <!-- End Scrollable Box -->
-
-        <!-- Box Links -->
-        <div class="d-flex justify-content-around">
-            <a href="/movie/create" class="btn btn-primary">Add</a>
-            <a href="/movie/get" class="btn btn-info">Find</a>
-            <a href="/movie/update" class="btn btn-warning">Update</a>
-            <a href="/movie/delete" class="btn btn-danger">Delete</a>
-        </div>
-        <!-- End Box Links -->
-
     </div>
 
     <!-- Bootstrap JS and dependencies (optional) -->
