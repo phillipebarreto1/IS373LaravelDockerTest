@@ -52,11 +52,24 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const id = urlParams.get('id');
 
         document.getElementById("id").value = id;
+
+        axios.get('/api/movie/' + id)
+            .then(function (response) {
+                console.log(response);
+                document.getElementById('title').value = response.data.title;
+                document.getElementById('yearReleased').value = response.data.yearReleased;
+                document.getElementById('avgRating').value = response.data.avgRating;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     </script>
 
 </body>
