@@ -26,8 +26,8 @@ Route::get('/movie/update', function (){
     return view('updateMovie');
 });
 
-Route::get('/movie/get', function (){
-    return view('getMovie');
+Route::get('/movie/info', function (){
+    return view('infoMovie');
 });
 
 Route::get('/movie/create', function (){
@@ -39,8 +39,11 @@ Route::get('/movie/delete', function (){
 });
 
 Route::get('/movie', function (){
-    return view('viewMovies');
+    $data = Movie::all();
+    return view('viewMovies', ['data'=> $data]);
 });
+
+
 
 Route::get('viewMovies', [MovieController::class, 'show']
 );

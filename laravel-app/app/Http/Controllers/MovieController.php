@@ -8,13 +8,7 @@ use Illuminate\Http\Request;
 
 class MovieController extends Controller
 {
-    
-    function show(){
-        $data = Movie::all();
-        return view ('viewMovies', ['movie'=>$data]);
-    }
-    
-    public function get(string $id): Movie {
+     public function get(string $id): Movie {
         // READ
         $movie = Movie::findOrFail($id);
         return $movie;
@@ -28,16 +22,19 @@ class MovieController extends Controller
         $movie->avgRating = $request->avgRating;
 
         $movie->save();
-        return "Add a movie";
+
+        return redirect('/movie');
     }
 
     public function update(Request $request): string {
         // UPDATE
         $movie = Movie::findOrFail($request->id);
         $movie->title = $request->title;
+        $movie->yearReleased = $request->yearReleased;
         $movie->avgRating = $request->avgRating;
         $movie->save();
-        return "Update a movie";
+
+        return redirect('/movie');
     }
 
     public function delete(string $id): string {
@@ -45,6 +42,6 @@ class MovieController extends Controller
         $movie = Movie::findOrFail($id);
         $movie->delete();
 
-        return "Delete a movie";
+        return "delete a movie";
     }
 }
