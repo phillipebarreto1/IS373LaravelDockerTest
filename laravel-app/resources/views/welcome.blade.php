@@ -14,7 +14,10 @@
 
 <body class="antialiased">
     <x-layout>
-        <p>Hello World</p>
+        <div class="container mt-5">
+            <h1>Home</h1>
+            <p>A website that stores a catalog of movies.</p>
+        </div>
     </x-layout>
 </body>
 
