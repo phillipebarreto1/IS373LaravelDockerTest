@@ -43,7 +43,14 @@ Route::get('/movie', function (){
     return view('viewMovies', ['data'=> $data]);
 });
 
+Route::get('/login', function (){
+    return view('login');
+});
 
+Route::get('/register', function (){
+    return view('register');
+});
 
 Route::get('viewMovies', [MovieController::class, 'show']
 );
+
