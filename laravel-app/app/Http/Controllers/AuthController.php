@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
@@ -16,9 +15,6 @@ class AuthController extends Controller
         $email = $request->email;
         $username = $request->username;
         $password = $request->password;
-
-        Log::info('Help me');
-        Log::info($request->email);
 
         $user = new User();
 
