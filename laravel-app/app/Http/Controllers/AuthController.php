@@ -75,10 +75,20 @@ class AuthController extends Controller
         ]);
     }
 
+    public function get_token_auth_status(string $token): string {
+        $decoded = $this->decode_auth_token($token);
+        $decoded_array = (array) $decoded;
+        if ($decoded_array['auth']) {
+            return "true";
+        }
+        return "false";
+    }
+
     public function encode_auth_token(string $id)
     {
         $key = 'example_key';
         $payload = [
+            'auth' => true,
             'user_id' => $id,
         ];
 
@@ -87,7 +97,7 @@ class AuthController extends Controller
         return $encoded_token;
     }
 
-    public function decode_auth_token($encoded_token)
+    public function decode_auth_token(string $encoded_token)
     {
         $key = 'example_key';
         $decoded = JWT::decode($encoded_token, new Key($key, 'HS256'));
