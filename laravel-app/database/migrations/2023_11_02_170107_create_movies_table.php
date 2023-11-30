@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->bigInteger('yearReleased');
             $table->decimal('avgRating');
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
         });
     }
