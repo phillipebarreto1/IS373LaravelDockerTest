@@ -47,6 +47,7 @@ class RouteServiceProvider extends ServiceProvider
 
             /* Auth Routes */
             Route::post('/api/register', [AuthController::class, 'register']);
+            Route::post('/api/login', [AuthController::class, 'login']);
         });
     }
 }

@@ -34,4 +34,28 @@ class AuthController extends Controller
 
         return redirect('/login');
     }
+
+    public function login(Request $request): string {
+        // User registration
+        $user = new User();
+
+        $email_record = User::where('email', '=', $request->username)->first();
+        $username_record = User::where('username', '=', $request->username)->first();
+
+        if ($email_record != null) {
+            $result = Hash::check($request->password , $email_record->value('password'));
+            if ($result) {
+                return "Login Success";
+            }
+        }
+
+        else if ($username_record != null) {
+            $result = Hash::check($request->password , $username_record->value('password'));
+            if ($result) {
+                return "Login Success";
+            }
+        }
+
+        return "Login Failed";
+    }
 }
