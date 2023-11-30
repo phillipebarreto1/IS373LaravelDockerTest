@@ -32,10 +32,60 @@
 
             <!-- Add more fields as needed -->
 
-            <button type="submit" class="btn btn-primary">Save</button>
         </form>
+
+        <button type="submit" class="btn btn-primary" onclick="create_movie()">Save</button>
         <!-- End Movie Add Form -->
     </x-layout>
+    <script>
+        function get_cookie_value_by_name(name) {
+            const cookieValue = document.cookie
+                .split("; ")
+                .find((row) => row.startsWith(name + "="))
+                ?.split("=")[1];
+            return cookieValue;
+        }
+        
+        async function create_movie() {
+            const token = get_cookie_value_by_name("token")
+
+            console.log(token)
+
+            const response = await axios.get('/api/get-user-id/' + token);
+
+            const user_id = response.data;
+            console.log(user_id)
+
+            const title = document.getElementById("title").value;
+            const yearReleased = document.getElementById("yearReleased").value;
+            const avgRating = document.getElementById("avgRating").value;
+
+            axios.post('/api/movie', {
+                title: title,
+                yearReleased: yearReleased,
+                avgRating: avgRating,
+                user_id: user_id,
+            })
+                .then(function (response) {
+                    console.log(response.data)
+                    if (response.data.msg === "Login Failed") {
+                        alert("Login Failed");
+                        location.reload();
+                    }
+                    else if (response.data.msg === "Login Success") {
+                        document.cookie = "token=" + response.data.token;
+                        location.href = '/movie'
+                    }
+                    else {
+                        console.error("Something went wrong")
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+
+    </script>
 </body>
 
 </html>
