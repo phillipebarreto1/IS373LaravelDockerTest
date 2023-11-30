@@ -11,28 +11,24 @@ class AuthController extends Controller
 {
     //
     public function register(Request $request): string {
-        // CREATE
-        $email = $request->email;
-        $username = $request->username;
-        $password = $request->password;
-
+        // User registration
         $user = new User();
 
-        $email_record = User::where('email', '=', $email)->first();
+        $email_record = User::where('email', '=', $request->email)->first();
 
         if ($email_record != null) {
             return "Email exists";
         }
 
-        $username_record = User::where('username', '=', $username)->first();
+        $username_record = User::where('username', '=', $request->username)->first();
 
         if ($username_record != null) {
             return "Username exists";
         }
 
-        $user->email = $email;
-        $user->username = $username;
-        $user->password = Hash::make($password);
+        $user->email = $request->email;
+        $user->username = $request->username;
+        $user->password = Hash::make($request->password);
 
         $user->save();
 
