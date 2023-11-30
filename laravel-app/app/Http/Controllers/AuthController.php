@@ -75,13 +75,13 @@ class AuthController extends Controller
         ]);
     }
 
-    public function get_token_auth_status(string $token): string {
+    public function get_user_id_from_token(string $token): string {
         $decoded = $this->decode_auth_token($token);
         $decoded_array = (array) $decoded;
         if ($decoded_array['auth']) {
-            return "true";
+            return $decoded_array['user_id'];
         }
-        return "false";
+        return "User not authenicated";
     }
 
     public function encode_auth_token(string $id)
