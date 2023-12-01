@@ -58,7 +58,7 @@
             })
                 .then(function (response) {
                     console.log(response.data)
-                    if (response.data === "Create movie") {
+                    if (response.data === "create movie") {
                         location.href = "/movie"
                     }
                     else {
