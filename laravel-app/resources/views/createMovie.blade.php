@@ -38,18 +38,8 @@
         <!-- End Movie Add Form -->
     </x-layout>
     <script>
-        function get_cookie_value_by_name(name) {
-            const cookieValue = document.cookie
-                .split("; ")
-                .find((row) => row.startsWith(name + "="))
-                ?.split("=")[1];
-            return cookieValue;
-        }
-        
         async function create_movie() {
-            const token = get_cookie_value_by_name("token")
-
-            console.log(token)
+            const token = Cookies.get('token')
 
             const response = await axios.get('/api/get-user-id/' + token);
 
@@ -68,13 +58,8 @@
             })
                 .then(function (response) {
                     console.log(response.data)
-                    if (response.data.msg === "Login Failed") {
-                        alert("Login Failed");
-                        location.reload();
-                    }
-                    else if (response.data.msg === "Login Success") {
-                        document.cookie = "token=" + response.data.token;
-                        location.href = '/movie'
+                    if (response.data === "Create movie") {
+                        location.href = "/movie"
                     }
                     else {
                         console.error("Something went wrong")
