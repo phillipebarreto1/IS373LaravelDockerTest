@@ -20,12 +20,17 @@ class MovieTest extends TestCase
     public function test_create_movie(): void
     {
         // CREATE Test Case
-        $response = $this->postJson('/api/movie', ['title' => 'Matrix', 'yearReleased' => 1990, 'avgRating' => 5.0]);
+        $response = $this->postJson('/api/movie', 
+            [
+                'title' => 'Matrix', 
+                'yearReleased' => 1990, 
+                'avgRating' => 5.0,
+                'user_id' => 1,
+            ]);
 
         $response->assertStatus(200);
 
-        $response->assertSeeText("HTTP/1.0 302 Found", $escaped = true);
-        $response->assertSeeText("Location:      http://localhost/movie", $escaped = true);
+        $response->assertContent("create movie");
     }
 
     public function test_get_movie(): void 
@@ -41,6 +46,7 @@ class MovieTest extends TestCase
                  ->where('title', 'Matrix')
                  ->where('yearReleased', 1990)
                  ->where('avgRating', 5)
+                 ->where('user_id', 1)
                  ->etc()
         );
         

@@ -24,7 +24,7 @@ class MovieController extends Controller
 
         $movie->save();
 
-        return "Create movie";
+        return "create movie";
     }
 
     public function update(Request $request): string {
