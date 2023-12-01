@@ -59,8 +59,6 @@ Route::get('/movie/delete', function (){
     }
 
 Route::get('/movie', function (Request $request){
-    //$token = $request->cookie('token');
-
     $token = $_COOKIE['token'];
 
     $user_id = get_user_id_from_token($token);
