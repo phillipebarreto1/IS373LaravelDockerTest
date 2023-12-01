@@ -3,10 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MovieController;
 use App\Models\Movie;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use Firebase\JWT\JWT;
-use Firebase\JWT\Key;
+
+use App\Library\MyJWT;
 
 
 /*
@@ -26,55 +25,48 @@ Route::get('/', function () {
 
 /*Route::put('/movie/{id}', 'MovieController@update')->name('movie.update'); */
 
-Route::get('/movie/update', function (){
+Route::get('/movie/update', function () {
+    // auth
     return view('updateMovie');
 });
 
-Route::get('/movie/info', function (){
+Route::get('/movie/info', function () {
+    // auth
     return view('infoMovie');
 });
 
-Route::get('/movie/create', function (){
+Route::get('/movie/create', function () {
+    // auth
     return view('createMovie');
 });
 
-Route::get('/movie/delete', function (){
+Route::get('/movie/delete', function () {
+    // auth
     return view('deleteMovie');
 });
 
- function decode_auth_token(string $encoded_token)
-    {
-        $key = 'example_key';
-        $decoded = JWT::decode($encoded_token, new Key($key, 'HS256'));
-        return $decoded;
-    }
-
-    function get_user_id_from_token(string $token): string {
-        $decoded = decode_auth_token($token);
-        $decoded_array = (array) $decoded;
-        if ($decoded_array['auth']) {
-            return $decoded_array['user_id'];
-        }
-        return "User not authenicated";
-    }
-
-Route::get('/movie', function (Request $request){
+Route::get('/movie', function (Request $request) {
+    // auth
     $token = $_COOKIE['token'];
 
-    $user_id = get_user_id_from_token($token);
+    $jwt = new MyJWT;
+
+    $user_id = $jwt->get_user_id_from_token($token);
 
     $data = Movie::all()->where('user_id', '=', $user_id);
-    return view('viewMovies', ['data'=> $data]);
+    return view('viewMovies', ['data' => $data]);
 });
 
-Route::get('/login', function (){
+Route::get('/login', function () {
     return view('login');
 });
 
-Route::get('/register', function (){
+Route::get('/register', function () {
     return view('register');
 });
 
-Route::get('viewMovies', [MovieController::class, 'show']
+Route::get(
+    'viewMovies',
+    [MovieController::class, 'show']
 );
 
