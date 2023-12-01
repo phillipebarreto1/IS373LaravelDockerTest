@@ -39,7 +39,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/movie">Movie</a></li>
-                            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                            <li><button class="dropdown-item" onclick="logout()">Logout</button></li>
                         </ul>
                     </li>
                 </ul>
@@ -61,6 +61,12 @@
     <script src="
 https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js
 "></script>
+<script>
+    function logout() {
+        Cookies.remove('token')
+        location.href = 'login'
+    }
+    </script>
 </body>
 
 </html>
