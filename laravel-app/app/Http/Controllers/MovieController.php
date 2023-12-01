@@ -24,7 +24,7 @@ class MovieController extends Controller
 
         $movie->save();
 
-        return redirect('/movie');
+        return "Create movie";
     }
 
     public function update(Request $request): string {
