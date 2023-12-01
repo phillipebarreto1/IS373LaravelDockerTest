@@ -41,7 +41,7 @@ class AuthController extends Controller
         return redirect('/login');
     }
 
-    public function login(Request $request): Response
+    public function login(Request $request): JsonResponse
     {
         // User registration
 
@@ -50,46 +50,37 @@ class AuthController extends Controller
 
         if ($email_record != null) {
             if (Hash::check($request->password, $email_record->password)) {
-                $encoded_token = $this->encode_auth_token($email_record->value('id'));
+                $encoded_token = $this->encode_auth_token($email_record->id);
 
-                $minutes = 60;
-                $response = new Response('Set Cookie');
-                $response->withCookie(cookie('token', $encoded_token, $minutes));
-                return $response;
-
-                /*return response()->json([
+                return response()->json([
                     'msg' => 'Login Success',
-                    //'token' => $encoded_token,
-                ]);*/
+                    'token' => $encoded_token,
+                ]);
             }
             else {
-                $response = new Response('Password incorrect');
-                return $response;
+                return response()->json([
+                    'msg' => 'Password incorrect',
+                ]);
             }
         } else if ($username_record != null) {
             if (Hash::check($request->password, $username_record->password)) {
-                $encoded_token = $this->encode_auth_token($username_record->value('id'));
+                $encoded_token = $this->encode_auth_token($username_record->id);
 
-                $minutes = 60;
-                $response = new Response('Set Cookie');
-                $response->withCookie(cookie('token', $encoded_token, $minutes));
-                return $response;
-
-                /*
                 return response()->json([
                     'msg' => 'Login Success',
-                    //'token' => $encoded_token,
+                    'token' => $encoded_token,
                 ]);
-                */
             }
             else {
-                $response = new Response('Password incorrect');
-                return $response;   
+                return response()->json([
+                    'msg' => 'Password incorrect',
+                ]);   
             }
         }
         else {
-            $response = new Response('User not found');
-            return $response;
+            return response()->json([
+                    'msg' => 'User not found',
+                ]);;
         }
 
         
@@ -110,7 +101,7 @@ class AuthController extends Controller
         return "User not authenicated";
     }
 
-    public function encode_auth_token(string $id)
+    public function encode_auth_token(string $id): string
     {
         $key = 'example_key';
         $payload = [
