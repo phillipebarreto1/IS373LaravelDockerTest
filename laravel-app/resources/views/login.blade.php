@@ -36,16 +36,14 @@
             })
                 .then(function (response) {
                     console.log(response.data)
+                    
                     if (response.data.msg === "Login Failed") {
                         alert("Login Failed");
                         location.reload();
                     }
                     else if (response.data.msg === "Login Success") {
-                        document.cookie = "token=" + response.data.token; 
+                        Cookies.set('token', response.data.token)
                         location.href = '/movie'
-                    }
-                    else {
-                        console.error("Something went wrong")
                     }
                 })
                 .catch(function (error) {
