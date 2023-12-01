@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -19,13 +20,13 @@ class AuthController extends Controller
         // User registration
         $user = new User();
 
-        $email_record = User::where('email', '=', $request->email)->first();
+        $email_record = User::where('email', $request->email)->first();
 
         if ($email_record != null) {
             return "Email exists";
         }
 
-        $username_record = User::where('username', '=', $request->username)->first();
+        $username_record = User::where('username', $request->username)->first();
 
         if ($username_record != null) {
             return "Username exists";
@@ -40,39 +41,64 @@ class AuthController extends Controller
         return redirect('/login');
     }
 
-    public function login(Request $request): JsonResponse
+    public function login(Request $request): Response
     {
         // User registration
-        $user = new User();
 
-        $email_record = User::where('email', '=', $request->username)->first();
-        $username_record = User::where('username', '=', $request->username)->first();
+        $email_record = User::firstWhere('email', $request->username);
+        $username_record = User::firstWhere('username', $request->username);
 
         if ($email_record != null) {
-            $result = Hash::check($request->password, $email_record->value('password'));
-            if ($result) {
+            if (Hash::check($request->password, $email_record->password)) {
                 $encoded_token = $this->encode_auth_token($email_record->value('id'));
 
-                return response()->json([
+                $minutes = 60;
+                $response = new Response('Set Cookie');
+                $response->withCookie(cookie('token', $encoded_token, $minutes));
+                return $response;
+
+                /*return response()->json([
                     'msg' => 'Login Success',
-                    'token' => $encoded_token,
-                ]);
+                    //'token' => $encoded_token,
+                ]);*/
+            }
+            else {
+                $response = new Response('Password incorrect');
+                return $response;
             }
         } else if ($username_record != null) {
-            $result = Hash::check($request->password, $username_record->value('password'));
-            if ($result) {
+            if (Hash::check($request->password, $username_record->password)) {
                 $encoded_token = $this->encode_auth_token($username_record->value('id'));
 
+                $minutes = 60;
+                $response = new Response('Set Cookie');
+                $response->withCookie(cookie('token', $encoded_token, $minutes));
+                return $response;
+
+                /*
                 return response()->json([
                     'msg' => 'Login Success',
-                    'token' => $encoded_token,
+                    //'token' => $encoded_token,
                 ]);
+                */
+            }
+            else {
+                $response = new Response('Password incorrect');
+                return $response;   
             }
         }
+        else {
+            $response = new Response('User not found');
+            return $response;
+        }
 
-        return response()->json([
+        
+        $response = new Response('Login Failed');
+        return $response;
+
+        /*return response()->json([
             'msg' => 'Login Failed',
-        ]);
+        ]);*/
     }
 
     public function get_user_id_from_token(string $token): string {
