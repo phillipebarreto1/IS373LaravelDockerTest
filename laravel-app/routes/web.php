@@ -23,38 +23,104 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-/*Route::put('/movie/{id}', 'MovieController@update')->name('movie.update'); */
-
 Route::get('/movie/update', function () {
-    // auth
-    return view('updateMovie');
+    // auth route
+    
+    if (isset($_COOKIE['token'])) {
+        $token = $_COOKIE['token'];
+
+        $jwt = new MyJWT;
+
+        $auth = $jwt->get_auth_status_from_token($token);
+
+        if ($auth == "true") {
+            return view('updateMovie');
+        } else if ($auth == "false") {
+            return view('notAuthenticated');
+        }
+    }
+       
+    return view('notAuthenticated');
 });
 
 Route::get('/movie/info', function () {
-    // auth
-    return view('infoMovie');
+    // auth route
+
+    if (isset($_COOKIE['token'])) {
+        $token = $_COOKIE['token'];
+
+        $jwt = new MyJWT;
+
+        $auth = $jwt->get_auth_status_from_token($token);
+
+        if ($auth == "true") {
+            return view('infoMovie');
+        } else if ($auth == "false") {
+            return view('notAuthenticated');
+        }
+    }
+       
+    return view('notAuthenticated');
 });
 
 Route::get('/movie/create', function () {
-    // auth
-    return view('createMovie');
+    // auth route
+    if (isset($_COOKIE['token'])) {
+        $token = $_COOKIE['token'];
+
+        $jwt = new MyJWT;
+
+        $auth = $jwt->get_auth_status_from_token($token);
+
+        if ($auth == "true") {
+            return view('createMovie');
+        } else if ($auth == "false") {
+            return view('notAuthenticated');
+        }
+    }
+       
+    return view('notAuthenticated');
 });
 
 Route::get('/movie/delete', function () {
-    // auth
-    return view('deleteMovie');
+    // auth route
+    if (isset($_COOKIE['token'])) {
+        $token = $_COOKIE['token'];
+
+        $jwt = new MyJWT;
+
+        $auth = $jwt->get_auth_status_from_token($token);
+
+        if ($auth == "true") {
+            return view('deleteMovie');
+        } else if ($auth == "false") {
+            return view('notAuthenticated');
+        }
+    }
+       
+    return view('notAuthenticated');
 });
 
 Route::get('/movie', function (Request $request) {
-    // auth
-    $token = $_COOKIE['token'];
+    // auth route
+    if (isset($_COOKIE['token'])) {
+        $token = $_COOKIE['token'];
 
-    $jwt = new MyJWT;
+        $jwt = new MyJWT;
 
-    $user_id = $jwt->get_user_id_from_token($token);
+        $auth = $jwt->get_auth_status_from_token($token);
 
-    $data = Movie::all()->where('user_id', '=', $user_id);
-    return view('viewMovies', ['data' => $data]);
+        if ($auth == "true") {
+            $user_id = $jwt->get_user_id_from_token($token);
+
+            $data = Movie::all()->where('user_id', '=', $user_id);
+            return view('viewMovies', ['data' => $data]);
+        } else if ($auth == "false") {
+            return view('notAuthenticated');
+        }
+    }
+
+    return view('notAuthenticated');
 });
 
 Route::get('/login', function () {

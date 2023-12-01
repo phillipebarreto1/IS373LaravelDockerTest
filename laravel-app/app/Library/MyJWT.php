@@ -23,6 +23,15 @@ class MyJWT
         }
         return "User not authenicated";
     }
+
+    public function get_auth_status_from_token(string $token): string {
+        $decoded = $this->decode_auth_token($token);
+        $decoded_array = (array) $decoded;
+        if ($decoded_array['auth']) {
+            return "true";
+        }
+        return "false";
+    }
 }
 
 
