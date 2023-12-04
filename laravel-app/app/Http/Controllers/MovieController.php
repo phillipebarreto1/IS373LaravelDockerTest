@@ -20,10 +20,11 @@ class MovieController extends Controller
         $movie->title = $request->title;
         $movie->yearReleased = $request->yearReleased;
         $movie->avgRating = $request->avgRating;
+        $movie->user_id = $request->user_id;
 
         $movie->save();
 
-        return redirect('/movie');
+        return "create movie";
     }
 
     public function update(Request $request): string {

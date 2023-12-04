@@ -3,7 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MovieController;
 use App\Models\Movie;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+
+use App\Library\MyJWT;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,30 +23,116 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-/*Route::put('/movie/{id}', 'MovieController@update')->name('movie.update'); */
+Route::get('/movie/update', function () {
+    // auth route
+    
+    if (isset($_COOKIE['token'])) {
+        $token = $_COOKIE['token'];
 
-Route::get('/movie/update', function (){
-    return view('updateMovie');
+        $jwt = new MyJWT;
+
+        $auth = $jwt->get_auth_status_from_token($token);
+
+        if ($auth == "true") {
+            return view('updateMovie');
+        } else if ($auth == "false") {
+            return view('notAuthenticated');
+        }
+    }
+       
+    return view('notAuthenticated');
 });
 
-Route::get('/movie/info', function (){
-    return view('infoMovie');
+Route::get('/movie/info', function () {
+    // auth route
+
+    if (isset($_COOKIE['token'])) {
+        $token = $_COOKIE['token'];
+
+        $jwt = new MyJWT;
+
+        $auth = $jwt->get_auth_status_from_token($token);
+
+        if ($auth == "true") {
+            return view('infoMovie');
+        } else if ($auth == "false") {
+            return view('notAuthenticated');
+        }
+    }
+       
+    return view('notAuthenticated');
 });
 
-Route::get('/movie/create', function (){
-    return view('createMovie');
+Route::get('/movie/create', function () {
+    // auth route
+    if (isset($_COOKIE['token'])) {
+        $token = $_COOKIE['token'];
+
+        $jwt = new MyJWT;
+
+        $auth = $jwt->get_auth_status_from_token($token);
+
+        if ($auth == "true") {
+            return view('createMovie');
+        } else if ($auth == "false") {
+            return view('notAuthenticated');
+        }
+    }
+       
+    return view('notAuthenticated');
 });
 
-Route::get('/movie/delete', function (){
-    return view('deleteMovie');
+Route::get('/movie/delete', function () {
+    // auth route
+    if (isset($_COOKIE['token'])) {
+        $token = $_COOKIE['token'];
+
+        $jwt = new MyJWT;
+
+        $auth = $jwt->get_auth_status_from_token($token);
+
+        if ($auth == "true") {
+            return view('deleteMovie');
+        } else if ($auth == "false") {
+            return view('notAuthenticated');
+        }
+    }
+       
+    return view('notAuthenticated');
 });
 
-Route::get('/movie', function (){
-    $data = Movie::all();
-    return view('viewMovies', ['data'=> $data]);
+Route::get('/movie', function (Request $request) {
+    // auth route
+    if (isset($_COOKIE['token'])) {
+        $token = $_COOKIE['token'];
+
+        $jwt = new MyJWT;
+
+        $auth = $jwt->get_auth_status_from_token($token);
+
+        if ($auth == "true") {
+            $user_id = $jwt->get_user_id_from_token($token);
+
+            $data = Movie::all()->where('user_id', '=', $user_id);
+            return view('viewMovies', ['data' => $data]);
+        } else if ($auth == "false") {
+            return view('notAuthenticated');
+        }
+    }
+
+    return view('notAuthenticated');
 });
 
+Route::get('/login', function () {
+    return view('login');
+});
 
+Route::get('/register', function () {
+    return view('register');
+});
 
-Route::get('viewMovies', [MovieController::class, 'show']
+Route::get(
+    'viewMovies',
+    [MovieController::class, 'show']
 );
+

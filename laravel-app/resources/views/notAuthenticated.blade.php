@@ -8,8 +8,8 @@
 <body class="antialiased">
     <x-layout>
         <div class="container mt-5">
-            <h1>Home</h1>
-            <p>A website that stores a catalog of movies.</p>
+            <h1>Not Authenticated</h1>
+            <p>Click <a href="/login">here</a> to the login page to get authenticated </p>
         </div>
     </x-layout>
 </body>

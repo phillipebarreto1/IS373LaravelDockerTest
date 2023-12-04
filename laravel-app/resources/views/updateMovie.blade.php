@@ -2,17 +2,11 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Movie</title>
-
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
-
-    <div class="container mt-5">
+    <x-layout>
         <h1>Update Movie</h1>
 
         <!-- Movie Update Form -->
@@ -45,14 +39,7 @@
             <button type="submit" class="btn btn-primary">Save</button>
         </form>
         <!-- End Movie Update Form -->
-
-    </div>
-
-    <!-- Bootstrap JS and dependencies (optional) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    </x-layout>
 
     <script>
         const urlParams = new URLSearchParams(window.location.search);
@@ -71,7 +58,6 @@
                 console.log(error);
             });
     </script>
-
 </body>
 
 </html>
