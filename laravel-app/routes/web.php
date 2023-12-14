@@ -6,6 +6,7 @@ use App\Models\Movie;
 use Illuminate\Http\Request;
 
 use App\Library\MyJWT;
+use App\Http\Middleware\RouteAuthentication;
 
 
 /*
@@ -44,24 +45,8 @@ Route::get('/movie/update', function () {
 });
 
 Route::get('/movie/info', function () {
-    // auth route
-
-    if (isset($_COOKIE['token'])) {
-        $token = $_COOKIE['token'];
-
-        $jwt = new MyJWT;
-
-        $auth = $jwt->get_auth_status_from_token($token);
-
-        if ($auth == "true") {
-            return view('infoMovie');
-        } else if ($auth == "false") {
-            return view('notAuthenticated');
-        }
-    }
-       
-    return view('notAuthenticated');
-});
+    return view('infoMovie');
+})->middleware(RouteAuthentication::class);
 
 Route::get('/movie/create', function () {
     // auth route
@@ -135,4 +120,8 @@ Route::get(
     'viewMovies',
     [MovieController::class, 'show']
 );
+
+Route::get('/unauthorized', function() {
+    return view('notAuthenticated');
+});
 
