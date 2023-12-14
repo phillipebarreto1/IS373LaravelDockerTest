@@ -27,29 +27,47 @@
             </div>
             <div class="form-group mb-3">
                 <label for="confirm_pwd">Confirm Password</label>
-                <input type="password" class="form-control" id="confirm_pwd" placeholder="Enter password again">
+                <input type="password" class="form-control" id="confirm_pwd" placeholder="Enter password again"
+                    name="confirm_pwd">
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
+        <button type="submit" class="btn btn-primary" onclick="register()">Submit</button>
         <!-- End Movie Update Form -->
     </x-layout>
 
     <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const id = urlParams.get('id');
+        function register() {
+            const email = document.getElementById("email").value;
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const confirm_pwd = document.getElementById("confirm_pwd").value;
 
-        document.getElementById("id").value = id;
+            if (password !== confirm_pwd) {
+                alert("Passwords do not match");
+            }
+            else {
+                axios.post('/api/register', {
+                    email: email,
+                    username: username,
+                    password: password
+                })
+                    .then(function (response) {
+                        console.log(response.data)
 
-        axios.get('/api/movie/' + id)
-            .then(function (response) {
-                console.log(response);
-                document.getElementById('title').value = response.data.title;
-                document.getElementById('yearReleased').value = response.data.yearReleased;
-                document.getElementById('avgRating').value = response.data.avgRating;
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+                        if (response.data === "Register Success") {
+                            alert("Register Success");
+                            location.href = "/login"
+                        }
+                        else {
+                            alert(response.data);
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
+
+        }
     </script>
 </body>
 

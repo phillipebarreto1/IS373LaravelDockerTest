@@ -16,7 +16,6 @@ use App\Library\MyJWT;
 
 class AuthController extends Controller
 {
-    //
     public function register(Request $request): string
     {
         // User registration
@@ -40,7 +39,7 @@ class AuthController extends Controller
 
         $user->save();
 
-        return redirect('/login');
+        return "Register Success";
     }
 
     public function login(Request $request): JsonResponse
