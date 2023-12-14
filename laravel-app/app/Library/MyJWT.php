@@ -7,6 +7,19 @@ use Firebase\JWT\Key;
 
 class MyJWT
 {
+    public function encode_auth_token(string $id): string
+    {
+        $key = 'example_key';
+        $payload = [
+            'auth' => true,
+            'user_id' => $id,
+        ];
+
+        $encoded_token = JWT::encode($payload, $key, 'HS256');
+
+        return $encoded_token;
+    }
+
     public function decode_auth_token(string $encoded_token)
     {
         $key = 'example_key';
