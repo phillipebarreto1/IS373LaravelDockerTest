@@ -25,66 +25,16 @@ Route::get('/', function () {
 });
 
 Route::get('/movie/update', function () {
-    // auth route
-    
-    if (isset($_COOKIE['token'])) {
-        $token = $_COOKIE['token'];
-
-        $jwt = new MyJWT;
-
-        $auth = $jwt->get_auth_status_from_token($token);
-
-        if ($auth == "true") {
-            return view('updateMovie');
-        } else if ($auth == "false") {
-            return view('notAuthenticated');
-        }
-    }
-       
-    return view('notAuthenticated');
-});
+    return view('updateMovie');
+})->middleware(RouteAuthentication::class);
 
 Route::get('/movie/info', function () {
     return view('infoMovie');
 })->middleware(RouteAuthentication::class);
 
 Route::get('/movie/create', function () {
-    // auth route
-    if (isset($_COOKIE['token'])) {
-        $token = $_COOKIE['token'];
-
-        $jwt = new MyJWT;
-
-        $auth = $jwt->get_auth_status_from_token($token);
-
-        if ($auth == "true") {
-            return view('createMovie');
-        } else if ($auth == "false") {
-            return view('notAuthenticated');
-        }
-    }
-       
-    return view('notAuthenticated');
-});
-
-Route::get('/movie/delete', function () {
-    // auth route
-    if (isset($_COOKIE['token'])) {
-        $token = $_COOKIE['token'];
-
-        $jwt = new MyJWT;
-
-        $auth = $jwt->get_auth_status_from_token($token);
-
-        if ($auth == "true") {
-            return view('deleteMovie');
-        } else if ($auth == "false") {
-            return view('notAuthenticated');
-        }
-    }
-       
-    return view('notAuthenticated');
-});
+    return view('createMovie');
+})->middleware(RouteAuthentication::class);
 
 Route::get('/movie', function (Request $request) {
     // auth route
