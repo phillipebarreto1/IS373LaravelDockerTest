@@ -37,7 +37,7 @@ Route::get('/movie/create', function () {
 })->middleware(RouteAuthentication::class);
 
 Route::get('/movie', function (Request $request) {
-    // auth route
+    /* Special route authentication for the main movie route */
     if (isset($_COOKIE['token'])) {
         $token = $_COOKIE['token'];
 
@@ -50,12 +50,9 @@ Route::get('/movie', function (Request $request) {
 
             $data = Movie::all()->where('user_id', '=', $user_id);
             return view('viewMovies', ['data' => $data]);
-        } else if ($auth == "false") {
-            return view('notAuthenticated');
-        }
+        } 
     }
-
-    return view('notAuthenticated');
+    return redirect('unauthorized');
 });
 
 Route::get('/login', function () {
