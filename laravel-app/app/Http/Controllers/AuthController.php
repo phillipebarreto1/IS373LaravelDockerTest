@@ -74,4 +74,15 @@ class AuthController extends Controller
             'msg' => 'Login Failed',
         ]);
     }
+
+    public function get_user_id_from_token(string $token): string
+    {
+        $jwt = new MyJWT;
+        $decoded = $jwt->decode_auth_token($token);
+        $decoded_array = (array) $decoded;
+        if ($decoded_array['auth']) {
+            return $decoded_array['user_id'];
+        }
+        return "User not authenicated";
+    }
 }
