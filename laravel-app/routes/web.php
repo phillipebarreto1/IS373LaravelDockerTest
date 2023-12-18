@@ -6,6 +6,7 @@ use App\Models\Movie;
 use Illuminate\Http\Request;
 
 use App\Library\MyJWT;
+use App\Http\Middleware\RouteAuthentication;
 
 
 /*
@@ -24,85 +25,19 @@ Route::get('/', function () {
 });
 
 Route::get('/movie/update', function () {
-    // auth route
-    
-    if (isset($_COOKIE['token'])) {
-        $token = $_COOKIE['token'];
-
-        $jwt = new MyJWT;
-
-        $auth = $jwt->get_auth_status_from_token($token);
-
-        if ($auth == "true") {
-            return view('updateMovie');
-        } else if ($auth == "false") {
-            return view('notAuthenticated');
-        }
-    }
-       
-    return view('notAuthenticated');
-});
+    return view('updateMovie');
+})->middleware(RouteAuthentication::class);
 
 Route::get('/movie/info', function () {
-    // auth route
-
-    if (isset($_COOKIE['token'])) {
-        $token = $_COOKIE['token'];
-
-        $jwt = new MyJWT;
-
-        $auth = $jwt->get_auth_status_from_token($token);
-
-        if ($auth == "true") {
-            return view('infoMovie');
-        } else if ($auth == "false") {
-            return view('notAuthenticated');
-        }
-    }
-       
-    return view('notAuthenticated');
-});
+    return view('infoMovie');
+})->middleware(RouteAuthentication::class);
 
 Route::get('/movie/create', function () {
-    // auth route
-    if (isset($_COOKIE['token'])) {
-        $token = $_COOKIE['token'];
-
-        $jwt = new MyJWT;
-
-        $auth = $jwt->get_auth_status_from_token($token);
-
-        if ($auth == "true") {
-            return view('createMovie');
-        } else if ($auth == "false") {
-            return view('notAuthenticated');
-        }
-    }
-       
-    return view('notAuthenticated');
-});
-
-Route::get('/movie/delete', function () {
-    // auth route
-    if (isset($_COOKIE['token'])) {
-        $token = $_COOKIE['token'];
-
-        $jwt = new MyJWT;
-
-        $auth = $jwt->get_auth_status_from_token($token);
-
-        if ($auth == "true") {
-            return view('deleteMovie');
-        } else if ($auth == "false") {
-            return view('notAuthenticated');
-        }
-    }
-       
-    return view('notAuthenticated');
-});
+    return view('createMovie');
+})->middleware(RouteAuthentication::class);
 
 Route::get('/movie', function (Request $request) {
-    // auth route
+    /* Special route authentication for the main movie route */
     if (isset($_COOKIE['token'])) {
         $token = $_COOKIE['token'];
 
@@ -115,12 +50,9 @@ Route::get('/movie', function (Request $request) {
 
             $data = Movie::all()->where('user_id', '=', $user_id);
             return view('viewMovies', ['data' => $data]);
-        } else if ($auth == "false") {
-            return view('notAuthenticated');
-        }
+        } 
     }
-
-    return view('notAuthenticated');
+    return redirect('unauthorized');
 });
 
 Route::get('/login', function () {
@@ -135,4 +67,8 @@ Route::get(
     'viewMovies',
     [MovieController::class, 'show']
 );
+
+Route::get('/unauthorized', function() {
+    return view('notAuthenticated');
+});
 
